@@ -23,7 +23,7 @@
 
 #include "driver.h"
 
-#ifdef BOARD_MKS_ROBIN_NANO_30
+#if defined(BOARD_MKS_ROBIN_NANO_30) || defined(BOARD_MKS_ROBIN_NANO_31) 
 
 void board_init (void)
 {
