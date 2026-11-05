@@ -29,18 +29,18 @@
 
 #if IS_NUCLEO_DEVKIT
 // When debugging with Nucleo-144
-#define IS_NUCLEO_BOB
-#define SERIAL_PORT    32   // GPIOD: TX = 8, RX = 9
-#define SERIAL1_PORT    2   // GPIOB: TX = 10, RX = 11
+ #define IS_NUCLEO_BOB
+ #define SERIAL_PORT    32   // GPIOD: TX = 8, RX = 9
+ #define SERIAL1_PORT    2   // GPIOB: TX = 10, RX = 11
 #elif !defined(STM32F407xx) || HSE_VALUE != 8000000
 #error "This board has STM32F407 processor with a 8MHz crystal, select a corresponding build!"
 #else
-#undef EEPROM_ENABLE
-#define EEPROM_ENABLE  32
+ #undef EEPROM_ENABLE
+ #define EEPROM_ENABLE  32
 // UART priority: 1: Main (instead of USB) 2: MODBUS 3: MPG /keypad 4: bluetooth
 // available serial allocated according to priority: SERIAL, SERIAL1, SERIAL2
-#define SERIAL_PORT     1   // GPIOA: TX = 9, RX = 10 ; MPG/DRO/Keypad;  J24/WiFi
-#define SERIAL1_PORT    3   // GPIOB: TX = 10, RX = 11 ; J2 USART3
+ #define SERIAL_PORT     1   // GPIOA: TX = 9, RX = 10 ; MPG/DRO/Keypad;  J24/WiFi
+ #define SERIAL1_PORT    3   // GPIOB: TX = 10, RX = 11 ; J2 USART3
 #endif
 
 #define BOARD_NAME "MKS ROBIN-NANO 3.1"
@@ -98,15 +98,15 @@
 
 //Define ganged axis or A axis step pulse and step direction output pins.
 #if N_ABC_MOTORS > 0
-#define M3_AVAILABLE            // E0
-#define M3_STEP_PORT            GPIOD
-#define M3_STEP_PIN             6
-#define M3_DIRECTION_PORT       GPIOD
-#define M3_DIRECTION_PIN        3
-#define M3_LIMIT_PORT           GPIOC
-#define M3_LIMIT_PIN            4
-#define M3_ENABLE_PORT          GPIOB
-#define M3_ENABLE_PIN           3
+ #define M3_AVAILABLE            // E0
+ #define M3_STEP_PORT            GPIOD
+ #define M3_STEP_PIN             6
+ #define M3_DIRECTION_PORT       GPIOD
+ #define M3_DIRECTION_PIN        3
+ #define M3_LIMIT_PORT           GPIOC
+ #define M3_LIMIT_PIN            4
+ #define M3_ENABLE_PORT          GPIOB
+ #define M3_ENABLE_PIN           3
 #endif
 
 // Define ganged axis or B axis step pulse and step direction output pins.
@@ -169,45 +169,61 @@
 
 #endif // TRINAMIC_SPI_PORT
 
-
-// only 2 out PWN available
-#define AUXOUTPUT0_PWM_PORT     GPIOB
-#define AUXOUTPUT0_PWM_PIN      1			// FAN2
-#define AUXOUTPUT1_PWM_PORT     GPIOA
-#define AUXOUTPUT1_PWM_PIN      8			// SERVOS BLTOUCH
-
-
 #define AUXOUTPUT0_PORT         GPIOB //  PW-OFF
 #define AUXOUTPUT0_PIN          2
-#define AUXOUTPUT1_PORT         GPIOC //  EXP1.1 (Boozer)
-#define AUXOUTPUT1_PIN          5
-#define AUXOUTPUT2_PORT         GPIOE //  EXP1.2
+
+#define AUXOUTPUT1_PORT         GPIOE //  EXP1.2 
+#define AUXOUTPUT1_PIN          13
+
+#define AUXOUTPUT2_PORT         GPIOD //  EXP1.3
 #define AUXOUTPUT2_PIN          13
+
 #define AUXOUTPUT3_PORT         GPIOC //  EXP1.4
 #define AUXOUTPUT3_PIN          6
+
 #define AUXOUTPUT4_PORT         GPIOE //  EXP1.6
 #define AUXOUTPUT4_PIN          15
-#define AUXOUTPUT5_PORT         GPIOD //  EXP1.8
-#define AUXOUTPUT5_PIN          10
-#define AUXOUTPUT6_PORT         GPIOE //  EXP2.3
-#define AUXOUTPUT6_PIN          8
+
+#define AUXOUTPUT5_PORT         GPIOE //  EXP2.3
+#define AUXOUTPUT5_PIN          8
+
+#define AUXOUTPUT6_PORT         GPIOE //  EXP2.4
+#define AUXOUTPUT6_PIN          10
+
 #define AUXOUTPUT7_PORT         GPIOE //  EXP2.5
 #define AUXOUTPUT7_PIN          11
-#define AUXOUTPUT8_PORT         GPIOE //  EXP2.7
-#define AUXOUTPUT8_PIN          12
+
+#define AUXOUTPUT8_PORT         GPIOA //  EXP2.6
+#define AUXOUTPUT8_PIN          7
+
 #define AUXOUTPUT9_PORT         GPIOC //  FAN1
 #define AUXOUTPUT9_PIN          14
 
-#define AUXOUTPUT10_PORT         GPIOB // HE1
-#define AUXOUTPUT10_PIN          0
-#define AUXOUTPUT11_PORT         GPIOE // HE0
-#define AUXOUTPUT11_PIN          5
-#define AUXOUTPUT12_PORT         GPIOA // HB
-#define AUXOUTPUT12_PIN          0
+#define AUXOUTPUT10_PORT         GPIOB // FAN2
+#define AUXOUTPUT10_PIN          1
+
+#define AUXOUTPUT11_PORT         GPIOB // HE1
+#define AUXOUTPUT11_PIN          0
+
+#define AUXOUTPUT12_PORT         GPIOE // HE0
+#define AUXOUTPUT12_PIN          5
+
+#define AUXOUTPUT13_PORT         GPIOA // HB
+#define AUXOUTPUT13_PIN          0
+
+// 2 - 3 PWN available
+#define AUXOUTPUT0_PWM_PORT     GPIOA
+#define AUXOUTPUT0_PWM_PIN      8			// SERVOS BLTOUCH
+
+#define AUXOUTPUT1_PWM_PORT     AUXOUTPUT10_PORT
+#define AUXOUTPUT1_PWM_PIN      AUXOUTPUT10_PIN			// FAN2
+
+#define AUXOUTPUT2_PWM_PORT     AUXOUTPUT3_PORT
+#define AUXOUTPUT2_PWM_PIN      AUXOUTPUT3_PIN			// EXP1.4
 
 // analog input pins 0 to 1
-#define AUXINTPUT0_ANALOG_PORT  GPIOA // TH2 Thermistor input
-#define AUXINTPUT0_ANALOG_PIN   2
+#define AUXINPUT0_ANALOG_PORT  GPIOA // TH2 Thermistor input
+#define AUXINPUT0_ANALOG_PIN   2
 
 // AUX input pins  0 to 12
 #define AUXINPUT0_PORT          GPIOA // PW_DET
@@ -221,61 +237,58 @@
 
 #define AUXINPUT3_PORT          GPIOC // TB
 #define AUXINPUT3_PIN           0
+
 #define AUXINPUT4_PORT          GPIOC // TH1
 #define AUXINPUT4_PIN           1
-#define AUXINPUT5_PORT          GPIOD // EXP1.3
-#define AUXINPUT5_PIN           13
+
+#define AUXINPUT5_PORT          GPIOC // EXP1.1
+#define AUXINPUT5_PIN           5
+
 #define AUXINPUT6_PORT          GPIOE // EXP1.5
 #define AUXINPUT6_PIN           14
+
 #define AUXINPUT7_PORT          GPIOD // EXP1.7
 #define AUXINPUT7_PIN           11
-#define AUXINPUT8_PORT          GPIOA // EXP2.1
-#define AUXINPUT8_PIN           6
-#define AUXINPUT9_PORT          GPIOA // EXP2.2
-#define AUXINPUT9_PIN           5
-#define AUXINPUT10_PORT         GPIOE // EXP2.4
-#define AUXINPUT10_PIN          10
-#define AUXINPUT11_PORT         GPIOA // EXP2.6
-#define AUXINPUT11_PIN          7
-#define AUXINPUT12_PORT         GPIOD // SD_DET
-#define AUXINPUT12_PIN          12
+
+#define AUXINPUT8_PORT          GPIOD // EXP1.8
+#define AUXINPUT8_PIN           10
+
+#define AUXINPUT9_PORT          GPIOA // EXP2.1
+#define AUXINPUT9_PIN           6
+
+#define AUXINPUT10_PORT         GPIOA // EXP2.2
+#define AUXINPUT10_PIN          5
+
+#define AUXINPUT11_PORT         GPIOE // EXP2.7
+#define AUXINPUT11_PIN          12
 
 
-/* #if !SPINDLE_SYNC_ENABLE && !QEI_ENABLE
- #define AUXINPUT4_PORT          GPIOE                 // EXP2.4  (i2c-STROBE) IRQ_10
- #define AUXINPUT4_PIN           10
-#endif
-#if !QEI_ENABLE
- #define AUXINPUT5_PORT          GPIOE                 // EXP2.5  IRQ_11
- #define AUXINPUT5_PIN           11
-#endif
- */
 // Define driver spindle0 pins
 #if DRIVER_SPINDLE_ENABLE & SPINDLE_ENA
- #define SPINDLE_ENABLE_PORT     AUXOUTPUT6_PORT
- #define SPINDLE_ENABLE_PIN      AUXOUTPUT6_PIN     // EXP2.3
+ #define SPINDLE_ENABLE_PORT     AUXOUTPUT5_PORT   // EXP2.3
+ #define SPINDLE_ENABLE_PIN      AUXOUTPUT5_PIN     
 #endif
 #if DRIVER_SPINDLE_ENABLE & SPINDLE_DIR
- #define SPINDLE_DIRECTION_PORT   AUXOUTPUT7_PORT
- #define SPINDLE_DIRECTION_PIN    AUXOUTPUT7_PIN  // EXP2.5
+ #define SPINDLE_DIRECTION_PORT   AUXOUTPUT6_PORT  // EXP2.4
+ #define SPINDLE_DIRECTION_PIN    AUXOUTPUT6_PIN   
 #endif
 #if DRIVER_SPINDLE_ENABLE & SPINDLE_PWM
- #define SPINDLE_PWM_PORT      AUXOUTPUT10_PORT    // HE1
- #define SPINDLE_PWM_PIN       AUXOUTPUT10_PIN
+ #define SPINDLE_PWM_PORT      AUXOUTPUT11_PORT    // HE1
+ #define SPINDLE_PWM_PIN       AUXOUTPUT11_PIN
 #endif
 
 // Define driver spindle1 pins
 #if DRIVER_SPINDLE1_ENABLE & SPINDLE_ENA
- #define SPINDLE1_ENABLE_PORT     AUXOUTPUT8_PORT // EXP2.7
- #define SPINDLE1_ENABLE_PIN      AUXOUTPUT8_PIN
+ #define SPINDLE1_ENABLE_PORT     AUXOUTPUT7_PORT // EXP2.5
+ #define SPINDLE1_ENABLE_PIN      AUXOUTPUT7_PIN
 #endif
 #if DRIVER_SPINDLE1_ENABLE & SPINDLE_DIR
- #define SPINDLE1_DIRECTION_PORT  AUXOUTPUT5_PORT // EXP1.8
- #define SPINDLE1_DIRECTION_PIN   AUXOUTPUT5_PIN
+ #define SPINDLE1_DIRECTION_PORT  AUXOUTPUT4_PORT // EXP1.6
+ #define SPINDLE1_DIRECTION_PIN   AUXOUTPUT4_PIN
 #endif
 #if DRIVER_SPINDLE1_ENABLE & SPINDLE_PWM
- #define SPINDLE1_PWM_PORT        AUXOUTPUT11_PORT  // HE0
- #define SPINDLE1_PWM_PIN         AUXOUTPUT11_PIN
+ #define SPINDLE1_PWM_PORT        AUXOUTPUT12_PORT  // HE0
+ #define SPINDLE1_PWM_PIN         AUXOUTPUT12_PIN
 #endif
 
 // Define flood and mist coolant enable output pins.
@@ -284,8 +297,8 @@
  #define COOLANT_FLOOD_PIN       AUXOUTPUT9_PIN
 #endif
 #if COOLANT_ENABLE & COOLANT_MIST
- #define COOLANT_MIST_PORT       AUXOUTPUT12_PORT	// HB
- #define COOLANT_MIST_PIN        AUXOUTPUT12_PIN
+ #define COOLANT_MIST_PORT       AUXOUTPUT13_PORT	// HB
+ #define COOLANT_MIST_PIN        AUXOUTPUT13_PIN
 #endif
 
 
@@ -293,77 +306,86 @@
 #define RESET_PORT              AUXINPUT4_PORT
 #define RESET_PIN               AUXINPUT4_PIN     // Reset buton, TH1, 
 
-#define FEED_HOLD_PORT          AUXINPUT7_PORT   // EXP1.7 
-#define FEED_HOLD_PIN           AUXINPUT7_PIN      
+#define FEED_HOLD_PORT          AUXINPUT2_PORT   // MT_DET 
+#define FEED_HOLD_PIN           AUXINPUT2_PIN      
 
 #if IS_NUCLEO_DEVKIT
- #define CYCLE_START_PORT        GPIOA
- #define CYCLE_START_PIN         10                // When debugging with Nucleo-144
+ #define CYCLE_START_PORT        GPIOA    // When debugging with Nucleo-144
+ #define CYCLE_START_PIN         10    
 #else
- #define CYCLE_START_PORT        AUXINPUT6_PORT  // START button, EXP1.5
- #define CYCLE_START_PIN         AUXINPUT6_PIN
+ #define CYCLE_START_PORT        AUXINPUT0_PORT  // START button, DW_DET
+ #define CYCLE_START_PIN         AUXINPUT0_PIN
 #endif
 
 #define CONTROL_INMODE GPIO_BITBAND
 
 #if SAFETY_DOOR_ENABLE
- #define SAFETY_DOOR_PORT        AUXINPUT5_PORT		// EXP1.3  Require IRQ
- #define SAFETY_DOOR_PIN         AUXINPUT5_PIN
- #endif
+ #define SAFETY_DOOR_PORT        AUXINPUT3_PORT		// TB  Require IRQ
+ #define SAFETY_DOOR_PIN         AUXINPUT3_PIN
+#endif
 
-#if MOTOR_WARNING_ENABLE
- #define MOTOR_WARNING_PORT        AUXINPUT10_PORT  // EXP2.4
- #define MOTOR_WARNING_PIN         AUXINPUT10_PIN
+
+#if MOTOR_FAULT_ENABLE
+   #define MOTOR_FAULT_PORT        AUXINPUT5_PORT // EXP1.1
+   #define MOTOR_FAULT_PIN         AUXINPUT5_PIN
+#elif MOTOR_WARNING_ENABLE
+   #define MOTOR_WARNING_PORT        AUXINPUT5_PORT  
+   #define MOTOR_WARNING_PIN         AUXINPUT5_PIN
 #endif
 
 #if PROBE_ENABLE
- #define PROBE_PORT              AUXINPUT2_PORT  // MT_DET2, Require IRQ
- #define PROBE_PIN               AUXINPUT2_PIN
+ #define PROBE_PORT              AUXINPUT6_PORT  // EXP1.5, Require IRQ
+ #define PROBE_PIN               AUXINPUT6_PIN
 #endif
 #if TOOLSETTER_ENABLE
- #define TOOLSETTER_PORT              AUXINPUT3_PORT  // TB, Require IRQ
- #define TOOLSETTER_PIN               AUXINPUT3_PIN
+ #define TOOLSETTER_PORT              AUXINPUT7_PORT  // EXP1.7, Require IRQ
+ #define TOOLSETTER_PIN               AUXINPUT7_PIN
 #endif
 
-#if I2C_STROBE_ENABLE
- #define I2C_STROBE_PORT         AUXINPUT12_PORT // Require IRQ
- #define I2C_STROBE_PIN          AUXINPUT12_PIN
+//#if PROBE_DISCONNECT_ENABLE
+// #define PROBE_DISCONNECT_PIN
+
+#if ( SPINDLE_ENCODER_ENABLE && SPINDLE_SYNC_ENABLE  )
+#elif I2C_STROBE_ENABLE 
+ #define I2C_STROBE_PORT         AUXINPUT11_PORT // Require IRQ
+ #define I2C_STROBE_PIN          AUXINPUT11_PIN
 #elif MPG_ENABLE == 1		// switche MPG mode by pin
  #define MPG_AUX_ENABLE
- #define MPG_MODE_PORT           AUXINPUT10_PORT	// Require IRQ
- #define MPG_MODE_PIN            AUXINPUT10_PIN
-#elif QEI_SELECT_ENABLE && defined(QEI_ENABLE)
-  #define QEI_SELECT_PORT         AUXINPUT10_PORT  // Require IRQ
-  #define QEI_SELECT_PIN          AUXINPUT10_PIN
+ #define MPG_MODE_PORT           AUXINPUT11_PORT	// Require IRQ
+ #define MPG_MODE_PIN            AUXINPUT11_PIN
+#elif (QEI_SELECT_ENABLE && defined(QEI_ENABLE))
+  #define QEI_SELECT_PORT         AUXINPUT11_PORT  // Require IRQ
+  #define QEI_SELECT_PIN          AUXINPUT11_PIN
+#elif SDCARD_ENABLE
+    #define SD_DETECT_PORT       GPIOD // CD_DET
+    #define SD_DETECT_PIN        12 	// require interrupt
 #endif
 
 // Spindle encoder pins.
 #if SPINDLE_ENCODER_ENABLE
- #define RPM_COUNTER_N           3 // Spindle encoder pulse
- #define RPM_TIMER_N            2 // Spindle INDEX timer CH1 - INDEX !! contradict with SPINDLE_PWM on PA0
- #define SPINDLE_PULSE_PORT       AUXINPUT9_PORT
- #define SPINDLE_PULSE_PIN        AUXINPUT9_PIN			// EXP2.1  PA6; EXP2.6 PA7
+ #define RPM_COUNTER_N           2 // Spindle encoder pulse
+ #define RPM_TIMER_N            3 // Spindle timer
+ #define SPINDLE_PULSE_PORT      AUXINPUT10_PORT
+ #define SPINDLE_PULSE_PIN       AUXINPUT10_PIN			// EXP2.2  PA5
  #if SPINDLE_SYNC_ENABLE    // require SPINDLE_ENCODER_ENABLE
-//  #define RPM_TIMER_N            10 // Spindle INDEX timer CH1 - INDEX
-//  #define SPINDLE_INDEX_PORT      AUXINPUT11_PORT
-//  #define SPINDLE_INDEX_PIN       AUXINPUT11_PIN				// EXP1.4
-  #define SPINDLE_INDEX_PORT      AUXINPUT9_PORT
-  #define SPINDLE_INDEX_PIN       AUXINPUT9_PIN				// EXP2.2
+  #define SPINDLE_INDEX_PORT      AUXINPUT11_PORT   // require IRQ
+  #define SPINDLE_INDEX_PIN       AUXINPUT11_PIN	// EXP2.7 PE12
  #endif
 #endif
 
-#if QEI_ENABLE && !SPINDLE_SYNC_ENABLE  // Quadrature encoder interface require pin IRQ
- #define QEI_A_PORT              AUXINPUT8_PORT
- #define QEI_A_PIN               AUXINPUT8_PIN
- #define QEI_B_PORT              AUXINPUT11_PORT
- #define QEI_B_PIN               AUXINPUT11_PIN
+#if QEI_ENABLE // && !SPINDLE_SYNC_ENABLE  // !! only PA6 and PA7 Quadrature encoder interface require pin IRQ
+ #define QEI_A_PORT              GPIOA
+ #define QEI_A_PIN               6
+ #define QEI_B_PORT              GPIOA
+ #define QEI_B_PIN               7
+#else
+// #define AUXINPUT4_PORT          GPIOA // TH1
+// #define AUXINPUT4_PIN           6
+// #define AUXINPUT5_PORT          GPIOA // EXP1.1
+// #define AUXINPUT5_PIN           7
 #endif  // QEI_ENABLE
 
 #if SDCARD_ENABLE
-    #define SD_DETECT_PORT          GPIOD
-    #if !I2C_STROBE_ENABLE
-     #define SD_DETECT_PIN           12 	// require interrupt
-    #endif
     #define SD_CS_PORT              GPIOC
     #define SD_CS_PIN               9
     #define SPI_PORT                3 // GPIOC, SCK_PIN = 10, MISO_PIN = 11, MOSI_PIN = 12 (SPI3)
